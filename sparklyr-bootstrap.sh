@@ -3,7 +3,7 @@
 #Built for AWS AMI: ami-775e4f16 (RHEL 7.2)
 
 #install R
-sudo yum update -y
+yum -y --exclude=kernel\* update
 sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
 sudo yum install -y wget
 sudo yum install -y texlive
