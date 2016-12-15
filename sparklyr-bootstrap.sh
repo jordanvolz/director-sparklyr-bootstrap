@@ -1,5 +1,5 @@
 #!/bin/bash
-#created by jordan.volz@cloduera.com
+#created by jordan.volz@cloudera.com
 #Built for AWS AMI: ami-775e4f16 (RHEL 7.2)
 
 #install R
