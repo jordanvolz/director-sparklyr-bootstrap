@@ -26,47 +26,12 @@ sudo useradd rsuser
 sudo sh -c "echo 'rsuser:cloudera' | chpasswd"
 sudo sh -c "echo 'SPARK_HOME=/opt/cloudera/parcels/CDH/lib/spark/' >> /usr/lib64/R/etc/Renviron"
 
+echo "Installing R packages"
 #install packages
-wget https://cran.r-project.org/src/contrib/sparklyr_0.4.tar.gz
-wget https://cran.r-project.org/src/contrib/dplyr_0.5.0.tar.gz
-wget https://cran.r-project.org/src/contrib/nycflights13_0.2.0.tar.gz
-wget https://cran.r-project.org/src/contrib/assertthat_0.1.tar.gz
-wget https://cran.r-project.org/src/contrib/R6_2.2.0.tar.gz
-wget https://cran.r-project.org/src/contrib/Rcpp_0.12.7.tar.gz
-wget https://cran.r-project.org/src/contrib/tibble_1.2.tar.gz
-wget https://cran.r-project.org/src/contrib/magrittr_1.5.tar.gz
-wget https://cran.r-project.org/src/contrib/lazyeval_0.2.0.tar.gz
-wget https://cran.r-project.org/src/contrib/DBI_0.5-1.tar.gz
-wget https://cran.r-project.org/src/contrib/BH_1.60.0-2.tar.gz
-wget https://cran.r-project.org/src/contrib/readr_1.0.0.tar.gz
-wget https://cran.r-project.org/src/contrib/digest_0.6.10.tar.gz
-wget https://cran.r-project.org/src/contrib/config_0.2.tar.gz
-wget https://cran.r-project.org/src/contrib/rappdirs_0.3.1.tar.gz
-wget https://cran.r-project.org/src/contrib/rprojroot_1.0-2.tar.gz
-wget https://cran.r-project.org/src/contrib/withr_1.0.2.tar.gz
-wget https://cran.r-project.org/src/contrib/curl_2.1.tar.gz
-wget https://cran.r-project.org/src/contrib/hms_0.2.tar.gz
-wget https://cran.r-project.org/src/contrib/yaml_2.1.13.tar.gz
-sudo R CMD INSTALL assertthat_0.1.tar.gz
-sudo R CMD INSTALL R6_2.2.0.tar.gz
-sudo R CMD INSTALL Rcpp_0.12.7.tar.gz
-sudo R CMD INSTALL lazyeval_0.2.0.tar.gz
-sudo R CMD INSTALL tibble_1.2.tar.gz
-sudo R CMD INSTALL magrittr_1.5.tar.gz
-sudo R CMD INSTALL DBI_0.5-1.tar.gz
-sudo R CMD INSTALL BH_1.60.0-2.tar.gz
-sudo R CMD INSTALL dplyr_0.5.0.tar.gz
-sudo R CMD INSTALL curl_2.1.tar.gz
-sudo R CMD INSTALL hms_0.2.tar.gz
-sudo R CMD INSTALL yaml_2.1.13.tar.gz
-sudo R CMD INSTALL readr_1.0.0.tar.gz
-sudo R CMD INSTALL digest_0.6.10.tar.gz
-sudo R CMD INSTALL config_0.2.tar.gz
-sudo R CMD INSTALL rappdirs_0.3.1.tar.gz
-sudo R CMD INSTALL rprojroot_1.0-2.tar.gz
-sudo R CMD INSTALL withr_1.0.2.tar.gz
-sudo R CMD INSTALL sparklyr_0.4.tar.gz
-sudo R CMD INSTALL nycflights13_0.2.0.tar.gz
+# Rscript -e 'update.packages(ask = FALSE)'
+for pkgname in yaml assertthat R6 Rcpp lazyeval tibble magrittr DBI BH dplyr curl hms readr digest config rappdirs rprojroot withr sparklyr nycflights13
+do
+    Rscript -e 'if(!require("'$pkgname'", character.only = TRUE, quietly = TRUE)) install.packages("'$pkgname'", dependencies = TRUE, repos="https://cran.r-project.org")'
+done
 
-#exit
 exit 0
