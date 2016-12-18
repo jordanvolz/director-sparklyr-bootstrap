@@ -3,7 +3,7 @@
 #Built for AWS AMI: ami-775e4f16 (RHEL 7.2)
 
 #install R
-yum -y --exclude=kernel\* update
+sudo yum -y --exclude=kernel\* update
 sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
 sudo yum install -y wget texlive texlive-epsf texinfo texinfo-tex libcurl-devel R
 
@@ -20,7 +20,7 @@ sudo sh -c "echo 'SPARK_HOME=/opt/cloudera/parcels/CDH/lib/spark/' >> /usr/lib64
 echo "Installing R packages"
 #install packages
 # Rscript -e 'update.packages(ask = FALSE)'
-for pkgname in yaml assertthat R6 Rcpp lazyeval tibble magrittr DBI BH dplyr curl hms readr digest config rappdirs rprojroot withr sparklyr nycflights13
+for pkgname in sparklyr nycflights13
 do
     Rscript -e 'if(!require("'$pkgname'", character.only = TRUE, quietly = TRUE)) install.packages("'$pkgname'", dependencies = TRUE, repos="https://cran.r-project.org")'
 done
