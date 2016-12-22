@@ -22,7 +22,7 @@ echo "Installing R packages"
 # Rscript -e 'update.packages(ask = FALSE)'
 for pkgname in sparklyr nycflights13
 do
-    Rscript -e 'if(!require("'$pkgname'", character.only = TRUE, quietly = TRUE)) install.packages("'$pkgname'", dependencies = TRUE, repos="https://cran.r-project.org")'
+    sudo Rscript -e 'if(!require("'$pkgname'", character.only = TRUE, quietly = TRUE)) install.packages("'$pkgname'", dependencies = TRUE, repos="https://cran.r-project.org")'
 done
 
 exit 0
