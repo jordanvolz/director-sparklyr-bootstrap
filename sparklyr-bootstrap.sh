@@ -8,8 +8,8 @@ sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release
 sudo yum install -y wget texlive texlive-epsf texinfo texinfo-tex libcurl-devel R
 
 #install rstudio-server
-wget https://download2.rstudio.org/rstudio-server-rhel-0.99.903-x86_64.rpm
-sudo yum install -y --nogpgcheck rstudio-server-rhel-0.99.903-x86_64.rpm
+wget https://download2.rstudio.org/rstudio-server-rhel-1.0.44-x86_64.rpm
+sudo yum -y install --nogpgcheck rstudio-server-rhel-1.0.44-x86_64.rpm
 sudo service rstudio-server start
 
 #setup SPARK_HOME env variable
