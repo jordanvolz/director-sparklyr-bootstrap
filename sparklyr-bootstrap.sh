@@ -15,6 +15,7 @@ sudo rpm -Uvh http://mirror.centos.org/centos/7/os/x86_64/Packages/texinfo-tex-5
 sudo yum install -y texinfo-tex
 sudo yum install -y libcurl-devel
 sudo yum install -y R
+sudo yum install -y ruby
 
 #install rstudio-server
 wget https://download2.rstudio.org/rstudio-server-rhel-0.99.903-x86_64.rpm
@@ -27,46 +28,12 @@ sudo sh -c "echo 'rsuser:cloudera' | chpasswd"
 sudo sh -c "echo 'SPARK_HOME=/opt/cloudera/parcels/CDH/lib/spark/' >> /usr/lib64/R/etc/Renviron"
 
 #install packages
-wget https://cran.r-project.org/src/contrib/sparklyr_0.4.tar.gz
-wget https://cran.r-project.org/src/contrib/dplyr_0.5.0.tar.gz
-wget https://cran.r-project.org/src/contrib/nycflights13_0.2.0.tar.gz
-wget https://cran.r-project.org/src/contrib/assertthat_0.1.tar.gz
-wget https://cran.r-project.org/src/contrib/R6_2.2.0.tar.gz
-wget https://cran.r-project.org/src/contrib/Rcpp_0.12.7.tar.gz
-wget https://cran.r-project.org/src/contrib/tibble_1.2.tar.gz
-wget https://cran.r-project.org/src/contrib/magrittr_1.5.tar.gz
-wget https://cran.r-project.org/src/contrib/lazyeval_0.2.0.tar.gz
-wget https://cran.r-project.org/src/contrib/DBI_0.5-1.tar.gz
-wget https://cran.r-project.org/src/contrib/BH_1.60.0-2.tar.gz
-wget https://cran.r-project.org/src/contrib/readr_1.0.0.tar.gz
-wget https://cran.r-project.org/src/contrib/digest_0.6.10.tar.gz
-wget https://cran.r-project.org/src/contrib/config_0.2.tar.gz
-wget https://cran.r-project.org/src/contrib/rappdirs_0.3.1.tar.gz
-wget https://cran.r-project.org/src/contrib/rprojroot_1.0-2.tar.gz
-wget https://cran.r-project.org/src/contrib/withr_1.0.2.tar.gz
-wget https://cran.r-project.org/src/contrib/curl_2.1.tar.gz
-wget https://cran.r-project.org/src/contrib/hms_0.2.tar.gz
-wget https://cran.r-project.org/src/contrib/yaml_2.1.13.tar.gz
-sudo R CMD INSTALL assertthat_0.1.tar.gz
-sudo R CMD INSTALL R6_2.2.0.tar.gz
-sudo R CMD INSTALL Rcpp_0.12.7.tar.gz
-sudo R CMD INSTALL lazyeval_0.2.0.tar.gz
-sudo R CMD INSTALL tibble_1.2.tar.gz
-sudo R CMD INSTALL magrittr_1.5.tar.gz
-sudo R CMD INSTALL DBI_0.5-1.tar.gz
-sudo R CMD INSTALL BH_1.60.0-2.tar.gz
-sudo R CMD INSTALL dplyr_0.5.0.tar.gz
-sudo R CMD INSTALL curl_2.1.tar.gz
-sudo R CMD INSTALL hms_0.2.tar.gz
-sudo R CMD INSTALL yaml_2.1.13.tar.gz
-sudo R CMD INSTALL readr_1.0.0.tar.gz
-sudo R CMD INSTALL digest_0.6.10.tar.gz
-sudo R CMD INSTALL config_0.2.tar.gz
-sudo R CMD INSTALL rappdirs_0.3.1.tar.gz
-sudo R CMD INSTALL rprojroot_1.0-2.tar.gz
-sudo R CMD INSTALL withr_1.0.2.tar.gz
-sudo R CMD INSTALL sparklyr_0.4.tar.gz
-sudo R CMD INSTALL nycflights13_0.2.0.tar.gz
+wget https://cran.r-project.org/src/contrib/
+wget https://gist.githubusercontent.com/chezou/5d7d70b47ef45d8f72623263da246fda/raw/c1ea394da45020c8e565686242d732d79d7206d2/generate_package_list.rb
+wget https://gist.githubusercontent.com/chezou/5d7d70b47ef45d8f72623263da246fda/raw/f075888723acb4238e74a8365e9884a75ead82d2/target_packages
+cat index.html | ruby generate_package_list.rb > install_target_packages.sh
+chmod +x install_target_packages.sh
+./install_target_packages.sh
 
 #exit
 exit 0
