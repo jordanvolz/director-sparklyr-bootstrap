@@ -4,7 +4,7 @@
 
 #install R
 sudo yum -y --exclude=kernel\* update
-sudo rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
+sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 sudo yum install -y wget texlive texlive-epsf texinfo texinfo-tex libcurl-devel R
 
 #install rstudio-server
